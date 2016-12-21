@@ -1,0 +1,52 @@
+html
+  head
+    // This is Pug varaiable
+    title= title
+  body
+    script(src="https://code.jquery.com/jquery-3.1.1.js")
+    script(src="https://cdn.jsdelivr.net/riot/3.0/riot.js")
+    script(src="https://cdn.jsdelivr.net/riot-route/3.0.2/route.js")
+    script(src="/js/tags.js")
+
+    // This is Pug variable
+    h1 #{title}
+    h2 #{message}
+    div data=!{JSON.stringify(data)}
+
+    hr
+    todo(red_completed="true")
+
+    hr
+    route
+
+    hr
+    login
+
+    script.
+      var data = JSON.parse('!{JSON.stringify(data)}');
+      riot.mount('todo', data);
+      riot.mount('route');
+
+      // Login
+      var auth = riot.observable();
+      auth.login = function(params) {
+        $.post('/api/login', params, function(json) {
+          auth.trigger('login', json);
+        });
+      }
+      auth.logout = function(params) {
+        $.get('/api/logout', function() {
+          auth.trigger('logout');
+        });
+      }
+      riot.mount('login', { auth: auth });
+
+      // Observable
+      function Car() {
+        riot.observable(this);
+        this.on('start', function() {
+          console.log('started');
+        });
+      }
+      var car = new Car();
+      car.trigger('start');

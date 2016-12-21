@@ -1,0 +1,24 @@
+{
+  "name": "riot-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build:tag": "riot --template pug tag public/js/tags.js",
+    "watch:tag": "riot -w --template pug tag public/js/tags.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6",
+    "riot": "^3.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.2"
+  }
+}
